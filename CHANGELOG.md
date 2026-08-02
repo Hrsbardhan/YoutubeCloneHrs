@@ -3,5 +3,5 @@
 - Frontend UI architecture completed
 - Reusable cards implemented
 - Responsive foundation added
-- Loading states added
-- Error handling components added
+- Loading states implemented
+- Error handling implemented across main listing pages
