@@ -1,81 +1,152 @@
 ﻿import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
+import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
+import Card from "../components/Card";
 
 function Comments() {
+
     const {
         videoId
     } = useParams();
 
     const [comments, setComments] = useState([]);
+
     const [text, setText] = useState("");
 
-    const loadComments = async () => {
-        const response = await api.get(
-            `/comments/${videoId}`
-        );
+    const [loading, setLoading] = useState(true);
 
-        setComments(response.data);
+    const [error, setError] = useState("");
+
+
+    const loadComments = async () => {
+
+        try {
+
+            const response = await api.get(
+                `/comments/${videoId}`
+            );
+
+            setComments(response.data);
+
+        } catch (error) {
+
+            setError(
+                "Unable to load comments"
+            );
+
+        } finally {
+
+            setLoading(false);
+
+        }
     };
+
 
     useEffect(() => {
+
         loadComments();
-    }, []);
+
+    }, [videoId]);
+
 
     const addComment = async (e) => {
+
         e.preventDefault();
 
-        await api.post(
-            "/comments",
-            {
-                video: videoId,
-                text
-            },
-            {
-                headers: {
-                    Authorization:
+
+        try {
+
+            await api.post(
+                "/comments",
+                {
+                    video: videoId,
+                    text
+                },
+                {
+                    headers: {
+                        Authorization:
                         `Bearer ${localStorage.getItem("token")}`
+                    }
                 }
-            }
-        );
+            );
 
-        setText("");
 
-        loadComments();
+            setText("");
+
+            loadComments();
+
+
+        } catch (error) {
+
+            setError(
+                "Unable to add comment"
+            );
+
+        }
+
     };
 
+
+    if (loading) {
+
+        return <Loading />;
+
+    }
+
+
     return (
+
         <div>
-            <h2>
-                Comments
-            </h2>
+
+            {
+                error &&
+                <ErrorMessage
+                    message={error}
+                />
+            }
+
 
             <form onSubmit={addComment}>
+
                 <textarea
                     value={text}
-                    onChange={(e) => setText(e.target.value)}
                     placeholder="Write comment"
+                    onChange={(e) =>
+                        setText(e.target.value)
+                    }
                 />
+
 
                 <button>
                     Add Comment
                 </button>
+
             </form>
+
 
             {
                 comments.map((comment) => (
-                    <div key={comment._id}>
-                        <strong>
+
+                    <Card key={comment._id}>
+
+                        <h4>
                             {comment.user?.username}
-                        </strong>
+                        </h4>
+
 
                         <p>
                             {comment.text}
                         </p>
-                    </div>
+
+                    </Card>
+
                 ))
             }
+
         </div>
+
     );
 }
 

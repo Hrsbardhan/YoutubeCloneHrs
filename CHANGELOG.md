@@ -1,8 +1,10 @@
 ﻿## v0.3.0
 
 - Frontend UI architecture completed
-- Reusable card system implemented
+- Reusable components implemented
 - Responsive foundation added
 - Loading and error states added
-- Video details UI improved
-- Search UI improved
+- Video details improved
+- Search improved
+- Comments improved
+- Authentication navigation added
