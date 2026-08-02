@@ -8,6 +8,7 @@ import CreateChannel from "../pages/CreateChannel";
 import Playlist from "../pages/Playlist";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Comments from "../pages/Comments";
+import Search from "../pages/Search";
 
 function AppRoutes() {
     return (
@@ -20,9 +21,14 @@ function AppRoutes() {
 
                 <Route path="/" element={<Home />} />
 
+                <Route path="/search" element={<Search />} />
+
                 <Route path="/video/:id" element={<VideoDetails />} />
 
-                <Route path="/video/:videoId/comments" element={<Comments />} />
+                <Route
+                    path="/video/:videoId/comments"
+                    element={<Comments />}
+                />
 
                 <Route path="/channels" element={<ChannelList />} />
 

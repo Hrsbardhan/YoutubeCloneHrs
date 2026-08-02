@@ -26,11 +26,17 @@
 
 - [x] Comment UI
 
+- [x] Search UI
+
 Remaining:
 
-- [ ] Search UI
 - [ ] Responsive Design
-- [ ] Final Testing
+- [ ] Frontend Styling
+- [ ] Full Testing
+- [ ] Final Documentation
 
 Current:
-Frontend Feature Integration
+Frontend Features Completed
+
+Next:
+Responsive UI and styling
