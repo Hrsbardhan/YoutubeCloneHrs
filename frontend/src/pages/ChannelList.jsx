@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import api from "../services/api";
+import ChannelCard from "../components/ChannelCard";
 
 function ChannelList() {
     const [channels, setChannels] = useState([]);
@@ -15,28 +16,13 @@ function ChannelList() {
     }, []);
 
     return (
-        <div>
-            <h1>
-                Channels
-            </h1>
-
+        <div className="video-grid">
             {
                 channels.map((channel) => (
-                    <div key={channel._id}>
-                        <h3>
-                            {channel.name}
-                        </h3>
-
-                        <p>
-                            {channel.description}
-                        </p>
-
-                        <span>
-                            Subscribers:
-                            {" "}
-                            {channel.subscribers}
-                        </span>
-                    </div>
+                    <ChannelCard
+                        key={channel._id}
+                        channel={channel}
+                    />
                 ))
             }
         </div>

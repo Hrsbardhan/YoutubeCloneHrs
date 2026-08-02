@@ -1,9 +1,8 @@
-﻿## v0.2.0
+﻿## v0.3.0
 
-- Backend API completed
-- Authentication completed
-- Video integration completed
-- Channel integration completed
-- Playlist integration completed
-- Comment integration completed
-- Search integration completed
+- Frontend feature integration completed
+- Shared component architecture added
+- Responsive styling foundation added
+- Video cards added
+- Channel cards added
+- Playlist cards added

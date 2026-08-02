@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import api from "../services/api";
+import VideoCard from "../components/VideoCard";
 
 function Home() {
     const [videos, setVideos] = useState([]);
@@ -7,6 +8,7 @@ function Home() {
     useEffect(() => {
         const loadVideos = async () => {
             const response = await api.get("/videos");
+
             setVideos(response.data);
         };
 
@@ -14,22 +16,13 @@ function Home() {
     }, []);
 
     return (
-        <div>
-            <h1>
-                Videos
-            </h1>
-
+        <div className="video-grid">
             {
                 videos.map((video) => (
-                    <div key={video._id}>
-                        <h3>
-                            {video.title}
-                        </h3>
-
-                        <p>
-                            {video.description}
-                        </p>
-                    </div>
+                    <VideoCard
+                        key={video._id}
+                        video={video}
+                    />
                 ))
             }
         </div>

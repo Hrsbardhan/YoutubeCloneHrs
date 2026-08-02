@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import api from "../services/api";
+import PlaylistCard from "../components/PlaylistCard";
 
 function Playlist() {
     const [playlists, setPlaylists] = useState([]);
@@ -23,28 +24,13 @@ function Playlist() {
     }, []);
 
     return (
-        <div>
-            <h1>
-                My Playlists
-            </h1>
-
+        <div className="video-grid">
             {
                 playlists.map((playlist) => (
-                    <div key={playlist._id}>
-                        <h3>
-                            {playlist.title}
-                        </h3>
-
-                        <p>
-                            {playlist.description}
-                        </p>
-
-                        <p>
-                            Videos:
-                            {" "}
-                            {playlist.videos.length}
-                        </p>
-                    </div>
+                    <PlaylistCard
+                        key={playlist._id}
+                        playlist={playlist}
+                    />
                 ))
             }
         </div>

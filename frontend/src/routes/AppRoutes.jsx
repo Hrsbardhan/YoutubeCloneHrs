@@ -9,45 +9,66 @@ import Playlist from "../pages/Playlist";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Comments from "../pages/Comments";
 import Search from "../pages/Search";
+import MainLayout from "../layouts/MainLayout";
 
 function AppRoutes() {
     return (
         <BrowserRouter>
-            <Routes>
+            <MainLayout>
+                <Routes>
 
-                <Route path="/register" element={<Register />} />
+                    <Route
+                        path="/register"
+                        element={<Register />}
+                    />
 
-                <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/login"
+                        element={<Login />}
+                    />
 
-                <Route path="/" element={<Home />} />
+                    <Route
+                        path="/"
+                        element={<Home />}
+                    />
 
-                <Route path="/search" element={<Search />} />
+                    <Route
+                        path="/search"
+                        element={<Search />}
+                    />
 
-                <Route path="/video/:id" element={<VideoDetails />} />
+                    <Route
+                        path="/video/:id"
+                        element={<VideoDetails />}
+                    />
 
-                <Route
-                    path="/video/:videoId/comments"
-                    element={<Comments />}
-                />
+                    <Route
+                        path="/video/:videoId/comments"
+                        element={<Comments />}
+                    />
 
-                <Route path="/channels" element={<ChannelList />} />
+                    <Route
+                        path="/channels"
+                        element={<ChannelList />}
+                    />
 
-                <Route
-                    path="/channels/create"
-                    element={<CreateChannel />}
-                />
+                    <Route
+                        path="/channels/create"
+                        element={<CreateChannel />}
+                    />
 
-                <Route
-                    path="/playlists"
-                    element={<Playlist />}
-                />
+                    <Route
+                        path="/playlists"
+                        element={<Playlist />}
+                    />
 
-                <Route
-                    path="/playlists/create"
-                    element={<CreatePlaylist />}
-                />
+                    <Route
+                        path="/playlists/create"
+                        element={<CreatePlaylist />}
+                    />
 
-            </Routes>
+                </Routes>
+            </MainLayout>
         </BrowserRouter>
     );
 }
