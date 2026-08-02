@@ -23,12 +23,11 @@
 - [x] Channel UI
 
 - [x] Playlist UI
-    - [x] List Playlists
-    - [x] Create Playlist
+
+- [x] Comment UI
 
 Remaining:
 
-- [ ] Comment UI
 - [ ] Search UI
 - [ ] Responsive Design
 - [ ] Final Testing

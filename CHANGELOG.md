@@ -2,7 +2,8 @@
 
 - Backend API completed
 - Authentication implemented
-- Frontend API integration added
-- Login and registration pages added
-- Video listing page added
-- Video details page added
+- Frontend authentication completed
+- Video pages completed
+- Channel pages completed
+- Playlist pages completed
+- Comment interface completed
