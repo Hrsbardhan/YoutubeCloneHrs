@@ -1,7 +1,8 @@
 ﻿## v0.3.0
 
 - Frontend UI architecture completed
-- Reusable cards implemented
+- Reusable card system implemented
 - Responsive foundation added
-- Loading states implemented
-- Error handling implemented across main listing pages
+- Loading and error states added
+- Video details UI improved
+- Search UI improved
