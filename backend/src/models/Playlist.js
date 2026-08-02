@@ -1,13 +1,13 @@
 ﻿import mongoose from "mongoose";
 
-const channelSchema = new mongoose.Schema(
+const playlistSchema = new mongoose.Schema(
     {
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true
         },
-        name: {
+        title: {
             type: String,
             required: true,
             trim: true
@@ -16,14 +16,16 @@ const channelSchema = new mongoose.Schema(
             type: String,
             default: ""
         },
-        subscribers: {
-            type: Number,
-            default: 0
-        }
+        videos: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Video"
+            }
+        ]
     },
     {
         timestamps: true
     }
 );
 
-export default mongoose.model("Channel", channelSchema);
+export default mongoose.model("Playlist", playlistSchema);

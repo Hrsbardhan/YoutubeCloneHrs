@@ -1,67 +1,46 @@
-import mongoose from "mongoose";
-import commentSchema from "./Comment.js";
+﻿import mongoose from "mongoose";
 
 const videoSchema = new mongoose.Schema(
     {
-        title: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 200,
-            index: true,
-        },
-        description: {
-            type: String,
-            default: "",
-        },
-        category: {
-            type: String,
-            required: true,
-            index: true,
-        },
-        thumbnailUrl: {
-            type: String,
-            required: true,
-        },
-        videoUrl: {
-            type: String,
-            required: true,
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
         },
         channel: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Channel",
-            required: true,
-            index: true,
+            required: true
         },
-        uploader: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+        title: {
+            type: String,
             required: true,
-            index: true,
+            trim: true
+        },
+        description: {
+            type: String,
+            default: ""
+        },
+        videoUrl: {
+            type: String,
+            required: true
+        },
+        thumbnailUrl: {
+            type: String,
+            default: ""
         },
         views: {
             type: Number,
-            default: 0,
-            min: 0,
+            default: 0
         },
-        likes: {
-            type: Number,
-            default: 0,
-            min: 0,
-        },
-        dislikes: {
-            type: Number,
-            default: 0,
-            min: 0,
-        },
-        comments: [commentSchema],
+        category: {
+            type: String,
+            default: "General"
+        }
     },
     {
-        timestamps: true,
-        versionKey: false,
+        timestamps: true
     }
 );
-
-videoSchema.index({ title: "text", description: "text" });
 
 export default mongoose.model("Video", videoSchema);

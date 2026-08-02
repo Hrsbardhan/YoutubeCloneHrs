@@ -1,35 +1,20 @@
 ﻿import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-import { createToken } from "../config/jwt.js";
+import { generateToken } from "../config/jwt.js";
 
 export const registerUser = async (req, res) => {
     try {
-        const {
-            username,
-            email,
-            password
-        } = req.body;
+        const { username, email, password } = req.body;
 
-        if (!username || !email || !password) {
-            return res.status(400).json({
-                message: "All fields are required"
-            });
-        }
-
-        const existingUser = await User.findOne({
-            email
-        });
+        const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            return res.status(409).json({
-                message: "Email already registered"
+            return res.status(400).json({
+                message: "User already exists"
             });
         }
 
-        const hashedPassword = await bcrypt.hash(
-            password,
-            12
-        );
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
             username,
@@ -38,8 +23,8 @@ export const registerUser = async (req, res) => {
         });
 
         res.status(201).json({
-            message: "User created successfully",
-            token: createToken(user._id),
+            message: "Registration successful",
+            token: generateToken(user._id),
             user: {
                 id: user._id,
                 username: user.username,
@@ -53,17 +38,11 @@ export const registerUser = async (req, res) => {
     }
 };
 
-
 export const loginUser = async (req, res) => {
     try {
-        const {
-            email,
-            password
-        } = req.body;
+        const { email, password } = req.body;
 
-        const user = await User.findOne({
-            email
-        });
+        const user = await User.findOne({ email });
 
         if (!user) {
             return res.status(404).json({
@@ -71,12 +50,12 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const passwordMatch = await bcrypt.compare(
+        const validPassword = await bcrypt.compare(
             password,
             user.password
         );
 
-        if (!passwordMatch) {
+        if (!validPassword) {
             return res.status(401).json({
                 message: "Invalid credentials"
             });
@@ -84,7 +63,7 @@ export const loginUser = async (req, res) => {
 
         res.json({
             message: "Login successful",
-            token: createToken(user._id),
+            token: generateToken(user._id),
             user: {
                 id: user._id,
                 username: user.username,
