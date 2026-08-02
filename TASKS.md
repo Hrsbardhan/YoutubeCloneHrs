@@ -21,16 +21,17 @@
 - [x] Video UI
 
 - [x] Channel UI
-    - [x] Channel Listing
-    - [x] Create Channel
+
+- [x] Playlist UI
+    - [x] List Playlists
+    - [x] Create Playlist
 
 Remaining:
 
-- [ ] Playlist UI
 - [ ] Comment UI
 - [ ] Search UI
 - [ ] Responsive Design
 - [ ] Final Testing
 
 Current:
-Frontend Channel Integration
+Frontend Feature Integration

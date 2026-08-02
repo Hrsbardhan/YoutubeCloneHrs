@@ -5,40 +5,37 @@ import Home from "../pages/Home";
 import VideoDetails from "../pages/VideoDetails";
 import ChannelList from "../pages/ChannelList";
 import CreateChannel from "../pages/CreateChannel";
+import Playlist from "../pages/Playlist";
+import CreatePlaylist from "../pages/CreatePlaylist";
 
 function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
 
-                <Route
-                    path="/register"
-                    element={<Register />}
-                />
+                <Route path="/register" element={<Register />} />
 
-                <Route
-                    path="/login"
-                    element={<Login />}
-                />
+                <Route path="/login" element={<Login />} />
 
-                <Route
-                    path="/"
-                    element={<Home />}
-                />
+                <Route path="/" element={<Home />} />
 
-                <Route
-                    path="/video/:id"
-                    element={<VideoDetails />}
-                />
+                <Route path="/video/:id" element={<VideoDetails />} />
 
-                <Route
-                    path="/channels"
-                    element={<ChannelList />}
-                />
+                <Route path="/channels" element={<ChannelList />} />
 
                 <Route
                     path="/channels/create"
                     element={<CreateChannel />}
+                />
+
+                <Route
+                    path="/playlists"
+                    element={<Playlist />}
+                />
+
+                <Route
+                    path="/playlists/create"
+                    element={<CreatePlaylist />}
                 />
 
             </Routes>
