@@ -1,67 +1,85 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-
+import "./Navbar.css";
 
 function Navbar() {
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const {
-        user,
-        logout
-    } = useContext(AuthContext);
-
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
 
     return (
+        <header className="navbar">
 
-        <nav>
+            <div className="navbar-left">
 
-            <a href="/">
-                Home
-            </a>
+                <button className="menu-btn">
+                    ☰
+                </button>
 
+                <Link className="logo" to="/">
+                    ▶ YouTube Clone
+                </Link>
 
-            {
-                user ? (
+            </div>
 
+            <div className="navbar-center">
+
+                <input
+                    className="search-input"
+                    type="text"
+                    placeholder="Search videos..."
+                />
+
+                <button className="search-btn">
+                    🔍
+                </button>
+
+            </div>
+
+            <div className="navbar-right">
+
+                {user ? (
                     <>
+                        <button className="icon-btn">
+                            📹
+                        </button>
 
-                        <span>
+                        <button className="icon-btn">
+                            🔔
+                        </button>
+
+                        <Link className="username" to="/channel">
                             {user.username}
-                        </span>
-
+                        </Link>
 
                         <button
-                            onClick={logout}
+                            className="logout-btn"
+                            onClick={handleLogout}
                         >
                             Logout
                         </button>
-
                     </>
-
                 ) : (
-
                     <>
-
-                        <a href="/login">
+                        <Link className="login-btn" to="/login">
                             Login
-                        </a>
+                        </Link>
 
-
-                        <a href="/register">
+                        <Link className="register-btn" to="/register">
                             Register
-                        </a>
-
+                        </Link>
                     </>
+                )}
 
-                )
+            </div>
 
-            }
-
-        </nav>
-
+        </header>
     );
-
 }
 
 export default Navbar;
-
-

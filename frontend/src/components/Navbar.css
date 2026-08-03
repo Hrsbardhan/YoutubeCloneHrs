@@ -1,0 +1,132 @@
+.navbar{
+    height:64px;
+    background:#181818;
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 20px;
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    border-bottom:1px solid #303030;
+}
+
+.navbar-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.menu-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.logo{
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.navbar-center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    max-width:700px;
+}
+
+.search-input{
+    width:100%;
+    max-width:550px;
+
+    padding:11px 16px;
+
+    border-radius:24px 0 0 24px;
+
+    border:1px solid #444;
+
+    background:#121212;
+
+    color:white;
+
+    outline:none;
+}
+
+.search-btn{
+
+    width:70px;
+
+    border:none;
+
+    background:#303030;
+
+    color:white;
+
+    border-radius:0 24px 24px 0;
+
+    cursor:pointer;
+}
+
+.navbar-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.icon-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.username{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.login-btn,
+.register-btn,
+.logout-btn{
+
+    background:#3ea6ff;
+
+    color:white;
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    text-decoration:none;
+
+    border:none;
+
+    cursor:pointer;
+}
+
+.logout-btn{
+    background:#ff4d4d;
+}
+
+@media(max-width:768px){
+
+    .navbar-center{
+        display:none;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+}
