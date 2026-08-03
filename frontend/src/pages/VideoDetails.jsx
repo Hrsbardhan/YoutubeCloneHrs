@@ -1,9 +1,10 @@
 ﻿import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import api from "../services/api";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import Card from "../components/Card";
+import Comments from "./Comments";
 
 function VideoDetails() {
 
@@ -62,39 +63,42 @@ function VideoDetails() {
 
 
     return (
-        <Card>
 
-            <h1>
-                {video.title}
-            </h1>
+        <>
 
+            <Card>
 
-            <video
-                controls
-                width="100%"
-                src={video.videoUrl}
-            />
+                <h1>
+                    {video.title}
+                </h1>
 
 
-            <p>
-                {video.description}
-            </p>
+                <video
+                    controls
+                    width="100%"
+                    src={video.videoUrl}
+                />
 
 
-            <p>
-                Views:
-                {" "}
-                {video.views}
-            </p>
+                <p>
+                    {video.description}
+                </p>
 
 
-            <Link
-                to={`/video/${id}/comments`}
-            >
-                View Comments
-            </Link>
+                <p>
+                    Views:
+                    {" "}
+                    {video.views}
+                </p>
 
-        </Card>
+
+            </Card>
+
+
+            <Comments />
+
+        </>
+
     );
 }
 

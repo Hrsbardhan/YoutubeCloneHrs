@@ -1,16 +1,31 @@
-﻿import Card from "./Card";
+﻿import { Link } from "react-router-dom";
+import Card from "./Card";
 
 function VideoCard({
     video
 }) {
+
     return (
         <Card>
-            <h3>
-                {video.title}
-            </h3>
+
+            <Link
+                to={`/video/${video._id}`}
+            >
+
+                <h3>
+                    {video.title}
+                </h3>
+
+            </Link>
 
             <p>
                 {video.description}
+            </p>
+
+            <p>
+                Channel:
+                {" "}
+                {video.channel?.name || "Unknown"}
             </p>
 
             <span>
@@ -18,6 +33,7 @@ function VideoCard({
                 {" "}
                 {video.views}
             </span>
+
         </Card>
     );
 }
