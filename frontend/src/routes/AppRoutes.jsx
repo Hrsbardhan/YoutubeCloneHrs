@@ -10,6 +10,7 @@ import Playlist from "../pages/Playlist";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Comments from "../pages/Comments";
 import Search from "../pages/Search";
+import UploadVideo from "../pages/UploadVideo";
 
 import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -25,47 +26,19 @@ function AppRoutes() {
 
                 <Routes>
 
-                    <Route
-                        path="/register"
-                        element={<Register />}
-                    />
+                    <Route path="/register" element={<Register />} />
 
+                    <Route path="/login" element={<Login />} />
 
-                    <Route
-                        path="/login"
-                        element={<Login />}
-                    />
+                    <Route path="/" element={<Home />} />
 
+                    <Route path="/search" element={<Search />} />
 
-                    <Route
-                        path="/"
-                        element={<Home />}
-                    />
+                    <Route path="/video/:id" element={<VideoDetails />} />
 
+                    <Route path="/video/:videoId/comments" element={<Comments />} />
 
-                    <Route
-                        path="/search"
-                        element={<Search />}
-                    />
-
-
-                    <Route
-                        path="/video/:id"
-                        element={<VideoDetails />}
-                    />
-
-
-                    <Route
-                        path="/video/:videoId/comments"
-                        element={<Comments />}
-                    />
-
-
-                    <Route
-                        path="/channels"
-                        element={<ChannelList />}
-                    />
-
+                    <Route path="/channels" element={<ChannelList />} />
 
                     <Route
                         path="/channels/create"
@@ -76,7 +49,6 @@ function AppRoutes() {
                         }
                     />
 
-
                     <Route
                         path="/playlists"
                         element={
@@ -86,12 +58,20 @@ function AppRoutes() {
                         }
                     />
 
-
                     <Route
                         path="/playlists/create"
                         element={
                             <ProtectedRoute>
                                 <CreatePlaylist />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/upload"
+                        element={
+                            <ProtectedRoute>
+                                <UploadVideo />
                             </ProtectedRoute>
                         }
                     />

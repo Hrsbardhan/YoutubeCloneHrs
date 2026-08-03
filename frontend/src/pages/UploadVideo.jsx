@@ -1,128 +1,122 @@
 ﻿import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 function UploadVideo() {
+
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         title: "",
         description: "",
         videoUrl: "",
         thumbnailUrl: "",
-        category: "",
-        channel: ""
+        category: ""
     });
+
+    const [error, setError] = useState("");
+
+
+    const handleChange = (e) => {
+
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+
+    };
 
 
     const submit = async (e) => {
 
         e.preventDefault();
 
+        try {
 
-        await api.post(
-            "/videos",
-            form
-        );
+            await api.post(
+                "/videos",
+                form
+            );
 
+            navigate("/");
 
-        setForm({
-            title: "",
-            description: "",
-            videoUrl: "",
-            thumbnailUrl: "",
-            category: "",
-            channel: ""
-        });
+        } catch (error) {
+
+            setError(
+                "Unable to upload video"
+            );
+
+        }
 
     };
 
 
     return (
 
-        <form onSubmit={submit}>
+        <div className="form-container">
 
-            <h1>
+            <h2>
                 Upload Video
-            </h1>
+            </h2>
 
 
-            <input
-                placeholder="Title"
-                value={form.title}
-                onChange={(e) =>
-                    setForm({
-                        ...form,
-                        title: e.target.value
-                    })
-                }
-            />
+            {
+                error &&
+                <p>
+                    {error}
+                </p>
+            }
 
 
-            <textarea
-                placeholder="Description"
-                value={form.description}
-                onChange={(e) =>
-                    setForm({
-                        ...form,
-                        description: e.target.value
-                    })
-                }
-            />
+            <form onSubmit={submit}>
+
+                <input
+                    name="title"
+                    placeholder="Title"
+                    value={form.title}
+                    onChange={handleChange}
+                />
 
 
-            <input
-                placeholder="Video URL"
-                value={form.videoUrl}
-                onChange={(e) =>
-                    setForm({
-                        ...form,
-                        videoUrl: e.target.value
-                    })
-                }
-            />
+                <textarea
+                    name="description"
+                    placeholder="Description"
+                    value={form.description}
+                    onChange={handleChange}
+                />
 
 
-            <input
-                placeholder="Thumbnail URL"
-                value={form.thumbnailUrl}
-                onChange={(e) =>
-                    setForm({
-                        ...form,
-                        thumbnailUrl: e.target.value
-                    })
-                }
-            />
+                <input
+                    name="videoUrl"
+                    placeholder="Video URL"
+                    value={form.videoUrl}
+                    onChange={handleChange}
+                />
 
 
-            <input
-                placeholder="Category"
-                value={form.category}
-                onChange={(e) =>
-                    setForm({
-                        ...form,
-                        category: e.target.value
-                    })
-                }
-            />
+                <input
+                    name="thumbnailUrl"
+                    placeholder="Thumbnail URL"
+                    value={form.thumbnailUrl}
+                    onChange={handleChange}
+                />
 
 
-            <input
-                placeholder="Channel ID"
-                value={form.channel}
-                onChange={(e) =>
-                    setForm({
-                        ...form,
-                        channel: e.target.value
-                    })
-                }
-            />
+                <input
+                    name="category"
+                    placeholder="Category"
+                    value={form.category}
+                    onChange={handleChange}
+                />
 
 
-            <button>
-                Upload
-            </button>
+                <button>
+                    Upload
+                </button>
 
+            </form>
 
-        </form>
+        </div>
 
     );
 
