@@ -1,35 +1,57 @@
-﻿.form-container {
-    max-width: 450px;
-    margin: 30px auto;
-    padding: 20px;
+﻿*{
+    box-sizing:border-box;
 }
 
-.form-container h2 {
-    text-align: center;
+body{
+
+    margin:0;
+
+    background:#0f0f0f;
+
+    color:#ffffff;
+
+    font-family:Roboto,Arial,sans-serif;
+
 }
 
-.form-container button {
-    width: 100%;
+#root{
+
+    min-height:100vh;
+
 }
 
-.page-container {
-    width: 100%;
+.app-layout{
+
+    display:flex;
+
+    min-height:calc(100vh - 64px);
+
 }
 
-@media (max-width: 600px) {
+.app-content{
 
-    .form-container {
-        padding: 10px;
-        margin: 15px auto;
-    }
+    flex:1;
 
-    button {
-        width: 100%;
-    }
+    padding:24px;
 
-    input,
-    textarea {
-        font-size: 16px;
-    }
+    overflow-x:hidden;
+
+    background:#0f0f0f;
+
+}
+
+@media(max-width:768px){
+
+.app-layout{
+
+display:block;
+
+}
+
+.app-content{
+
+padding:16px;
+
+}
 
 }
