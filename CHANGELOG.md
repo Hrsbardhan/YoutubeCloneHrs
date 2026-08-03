@@ -39,3 +39,13 @@
 - Integrated PUT /videos/:id
 - Added Video Management edit workflow
 - Video CRUD frontend completed
+
+## 2026-08-03
+
+- Completed Channel CRUD frontend
+- Added Channel Dashboard
+- Added Edit Channel page
+- Added Delete Channel workflow
+- Added owner filtering
+- Advanced roadmap to Playlist CRUD frontend
+

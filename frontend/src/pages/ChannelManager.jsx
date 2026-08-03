@@ -19,7 +19,15 @@ function ChannelManager() {
 
             const { data } = await api.get("/channels");
 
-            setChannels(data);
+            const token = JSON.parse(atob(localStorage.getItem("token").split(".")[1]));
+
+            const mine = data.filter(
+                channel =>
+                    channel.owner?._id === token.id ||
+                    channel.owner === token.id
+            );
+
+            setChannels(mine);
 
         } catch {
 
@@ -47,7 +55,7 @@ function ChannelManager() {
 
             await api.delete(`/channels/${id}`);
 
-            loadChannels();
+            setChannels(prev => prev.filter(c => c._id !== id));
 
         } catch {
 
@@ -68,6 +76,11 @@ function ChannelManager() {
             {error && <ErrorMessage message={error} />}
 
             {
+                channels.length === 0 &&
+                <p>No channels found.</p>
+            }
+
+            {
                 channels.map(channel => (
 
                     <Card key={channel._id}>
@@ -77,25 +90,19 @@ function ChannelManager() {
                         <p>{channel.description}</p>
 
                         <button
-                            onClick={() =>
-                                navigate(`/channels/${channel._id}`)
-                            }
+                            onClick={() => navigate(`/channels/${channel._id}`)}
                         >
                             View
                         </button>
 
                         <button
-                            onClick={() =>
-                                navigate(`/manage/channels/${channel._id}/edit`)
-                            }
+                            onClick={() => navigate(`/manage/channels/${channel._id}/edit`)}
                         >
                             Edit
                         </button>
 
                         <button
-                            onClick={() =>
-                                deleteChannel(channel._id)
-                            }
+                            onClick={() => deleteChannel(channel._id)}
                         >
                             Delete
                         </button>

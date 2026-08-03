@@ -1,31 +1,28 @@
 # PROJECT STATE
 
-Version: v0.8.0
+Version: v0.9.0
 
 Current Phase:
 Frontend Integration
 
 Completed:
 - Authentication System
-- JWT Authentication Flow
+- JWT Authentication
 - Video CRUD Backend
+- Video CRUD Frontend
 - Channel CRUD Backend
+- Channel CRUD Frontend
 - Playlist CRUD Backend
 - Comment API
 - Search API
 - React Routing
-- Axios Layer
-- Login/Register Integration
-- Video Listing Integration
-- Video Upload Frontend
-- Video Edit Frontend
-- Video Management Dashboard
+- Axios Integration
 
 Current Milestone:
-Channel CRUD Frontend
+Playlist CRUD Frontend
 
 Next Tasks:
-1. Channel management dashboard
-2. Channel edit page
-3. Channel delete flow
-4. Verify ownership protection
+1. Playlist details
+2. Playlist edit
+3. Remove video from playlist
+4. Delete playlist
