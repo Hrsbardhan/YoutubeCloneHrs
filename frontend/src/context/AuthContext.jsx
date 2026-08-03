@@ -1,73 +1,94 @@
-﻿import { createContext, useState } from "react";
+﻿import {createContext,useEffect,useState} from "react";
+import api from "../services/api";
+import {
+saveToken,
+getToken,
+removeToken
+} from "../services/token";
 
+export const AuthContext=createContext();
 
-export const AuthContext =
-    createContext();
+export function AuthProvider({children}){
 
+const [user,setUser]=useState(null);
 
-export function AuthProvider({
-    children
-}) {
+const [loading,setLoading]=useState(true);
 
-    const [user, setUser] = useState(
-        JSON.parse(
-            localStorage.getItem("user")
-        ) || null
-    );
+useEffect(()=>{
 
+const token=getToken();
 
-    const login = (data) => {
+if(token){
 
-        localStorage.setItem(
-            "token",
-            data.token
-        );
+api.defaults.headers.common.Authorization=`Bearer ${token}`;
 
+try{
 
-        localStorage.setItem(
-            "user",
-            JSON.stringify(data.user)
-        );
+const payload=JSON.parse(atob(token.split(".")[1]));
 
+setUser({
 
-        setUser(
-            data.user
-        );
+id:payload.id,
 
-    };
+username:payload.username
 
+});
 
-    const logout = () => {
+}catch{
 
-        localStorage.removeItem(
-            "token"
-        );
+removeToken();
 
+}
 
-        localStorage.removeItem(
-            "user"
-        );
+}
 
+setLoading(false);
 
-        setUser(null);
+},[]);
 
-    };
+function login(data){
 
+saveToken(data.token);
 
-    return (
+api.defaults.headers.common.Authorization=`Bearer ${data.token}`;
 
-        <AuthContext.Provider
-            value={{
-                user,
-                login,
-                logout
-            }}
-        >
+const payload=JSON.parse(atob(data.token.split(".")[1]));
 
-            {children}
+setUser({
 
-        </AuthContext.Provider>
+id:payload.id,
 
-    );
+username:payload.username
+
+});
+
+}
+
+function logout(){
+
+removeToken();
+
+delete api.defaults.headers.common.Authorization;
+
+setUser(null);
+
+}
+
+return(
+
+<AuthContext.Provider
+value={{
+user,
+loading,
+login,
+logout
+}}
+>
+
+{children}
+
+</AuthContext.Provider>
+
+);
 
 }
