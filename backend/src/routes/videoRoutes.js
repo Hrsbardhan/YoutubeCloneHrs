@@ -14,16 +14,9 @@ import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 
-router.get(
-    "/",
-    getVideos
-);
+router.get("/", getVideos);
 
-
-router.get(
-    "/:id",
-    getVideoById
-);
+router.get("/:id", getVideoById);
 
 
 router.post(
@@ -34,14 +27,14 @@ router.post(
 
 
 router.put(
-    "/:id",
+    "//:id",
     protect,
     updateVideo
 );
 
 
 router.delete(
-    "/:id",
+    "//:id",
     protect,
     deleteVideo
 );

@@ -19,6 +19,7 @@ export const createVideo = async (req, res) => {
 
 export const getVideos = async (req, res) => {
     try {
+
         const videos = await Video.find()
             .populate("owner", "username")
             .populate("channel", "name");
@@ -26,15 +27,18 @@ export const getVideos = async (req, res) => {
         res.json(videos);
 
     } catch (error) {
+
         res.status(500).json({
             message: error.message
         });
+
     }
 };
 
 
 export const getVideoById = async (req, res) => {
     try {
+
         const video = await Video.findById(req.params.id);
 
         if (!video) {
@@ -50,14 +54,17 @@ export const getVideoById = async (req, res) => {
         res.json(video);
 
     } catch (error) {
+
         res.status(500).json({
             message: error.message
         });
+
     }
 };
 
 
 export const updateVideo = async (req, res) => {
+
     try {
 
         const video = await Video.findById(req.params.id);
@@ -70,8 +77,7 @@ export const updateVideo = async (req, res) => {
 
 
         if (
-            video.owner.toString() !==
-            req.user._id.toString()
+            video.owner.toString() !== req.user._id.toString()
         ) {
             return res.status(403).json({
                 message: "Not authorized"
@@ -79,10 +85,20 @@ export const updateVideo = async (req, res) => {
         }
 
 
-        Object.assign(
-            video,
-            req.body
-        );
+        video.title =
+            req.body.title ?? video.title;
+
+        video.description =
+            req.body.description ?? video.description;
+
+        video.videoUrl =
+            req.body.videoUrl ?? video.videoUrl;
+
+        video.thumbnailUrl =
+            req.body.thumbnailUrl ?? video.thumbnailUrl;
+
+        video.category =
+            req.body.category ?? video.category;
 
 
         await video.save();
@@ -98,6 +114,7 @@ export const updateVideo = async (req, res) => {
         });
 
     }
+
 };
 
 
@@ -105,9 +122,7 @@ export const deleteVideo = async (req, res) => {
 
     try {
 
-        const video = await Video.findById(
-            req.params.id
-        );
+        const video = await Video.findById(req.params.id);
 
 
         if (!video) {
@@ -120,8 +135,7 @@ export const deleteVideo = async (req, res) => {
 
 
         if (
-            video.owner.toString() !==
-            req.user._id.toString()
+            video.owner.toString() !== req.user._id.toString()
         ) {
 
             return res.status(403).json({
