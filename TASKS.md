@@ -1,22 +1,25 @@
 # TASKS
 
 Completed:
-[x] Authentication
+[x] Authentication Backend
 [x] Video CRUD Backend
 [x] Video CRUD Frontend
 [x] Channel CRUD Backend
 [x] Channel CRUD Frontend
+[x] Playlist CRUD Backend
+[x] Playlist CRUD Frontend
 
 Current:
-[ ] Playlist CRUD Frontend
+[ ] Authentication UI Completion
 
 Remaining:
-[ ] Playlist Details
-[ ] Playlist Update
-[ ] Playlist Delete
-[ ] Remove Video From Playlist
-[ ] Search UI Improvements
-[ ] Responsive Layout
+[ ] Register Verification
+[ ] Login Verification
+[ ] Logout
+[ ] Protected Navigation
+[ ] Watch Page
+[ ] Related Videos
+[ ] Responsive Design
 [ ] Final Regression
 [ ] Documentation Cleanup
 [ ] Capstone Verification

@@ -23,7 +23,15 @@ function PlaylistManager() {
 
             const { data } = await api.get("/playlists");
 
-            setPlaylists(data);
+            const token = JSON.parse(atob(localStorage.getItem("token").split(".")[1]));
+
+            const mine = data.filter(
+                playlist =>
+                    playlist.owner?._id === token.id ||
+                    playlist.owner === token.id
+            );
+
+            setPlaylists(mine);
 
         } catch {
 
