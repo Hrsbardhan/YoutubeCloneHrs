@@ -1,11 +1,13 @@
 ﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { register as registerRequest } from "../services/authService";
 import FormButton from "../components/FormButton";
-import { register } from "../services/authService";
+
 
 function Register() {
 
     const navigate = useNavigate();
+
 
     const [form, setForm] = useState({
         username: "",
@@ -13,33 +15,43 @@ function Register() {
         password: ""
     });
 
+
     const [error, setError] = useState("");
 
-    const handleChange = (event) => {
+
+    const handleChange = (e) => {
+
         setForm({
             ...form,
-            [event.target.name]: event.target.value
+            [e.target.name]: e.target.value
         });
+
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+
+    const submit = async (e) => {
+
+        e.preventDefault();
+
 
         try {
 
-            await register(form);
+            await registerRequest(form);
+
 
             navigate("/login");
+
 
         } catch (error) {
 
             setError(
-                error.response?.data?.message ||
                 "Registration failed"
             );
 
         }
+
     };
+
 
     return (
 
@@ -49,11 +61,17 @@ function Register() {
                 Register
             </h2>
 
+
             {
-                error && <p>{error}</p>
+                error &&
+                <p>
+                    {error}
+                </p>
             }
 
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={submit}>
+
 
                 <input
                     name="username"
@@ -61,6 +79,7 @@ function Register() {
                     value={form.username}
                     onChange={handleChange}
                 />
+
 
                 <input
                     name="email"
@@ -70,6 +89,7 @@ function Register() {
                     onChange={handleChange}
                 />
 
+
                 <input
                     name="password"
                     type="password"
@@ -78,14 +98,20 @@ function Register() {
                     onChange={handleChange}
                 />
 
+
                 <FormButton>
                     Register
                 </FormButton>
 
+
             </form>
 
+
         </div>
+
     );
+
 }
+
 
 export default Register;

@@ -2,9 +2,11 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
+
 function Navbar() {
 
     const {
+        user,
         logout
     } = useContext(AuthContext);
 
@@ -13,48 +15,51 @@ function Navbar() {
 
         <nav>
 
-            <h2>
-                YouTube Clone
-            </h2>
+            <Link to="/">
+                Home
+            </Link>
 
 
-            <div>
+            <Link to="/channels">
+                Channels
+            </Link>
 
-                <Link to="/">
-                    Home
-                </Link>
 
-                {" | "}
+            <Link to="/playlists">
+                Playlists
+            </Link>
 
-                <Link to="/search">
-                    Search
-                </Link>
 
-                {" | "}
+            {
+                user ? (
 
-                <Link to="/channels">
-                    Channels
-                </Link>
+                    <button
+                        onClick={logout}
+                    >
+                        Logout
+                    </button>
 
-                {" | "}
+                ) : (
 
-                <Link to="/playlists">
-                    Playlists
-                </Link>
+                    <>
+                        <Link to="/login">
+                            Login
+                        </Link>
 
-                {" | "}
+                        <Link to="/register">
+                            Register
+                        </Link>
+                    </>
 
-                <button
-                    onClick={logout}
-                >
-                    Logout
-                </button>
+                )
+            }
 
-            </div>
 
         </nav>
 
     );
+
 }
+
 
 export default Navbar;

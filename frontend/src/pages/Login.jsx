@@ -1,71 +1,101 @@
-﻿import { useState, useContext } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormButton from "../components/FormButton";
 import { login as loginRequest } from "../services/authService";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import FormButton from "../components/FormButton";
 
 function Login() {
 
     const navigate = useNavigate();
 
-    const { login } = useContext(AuthContext);
+    const {
+        login
+    } = useContext(AuthContext);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+
+    const [form, setForm] = useState({
+        email: "",
+        password: ""
+    });
+
 
     const [error, setError] = useState("");
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+
+    const handleChange = (e) => {
+
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+
+    };
+
+
+    const submit = async (e) => {
+
+        e.preventDefault();
 
         try {
-            const data = await loginRequest({
-                email,
-                password
-            });
+
+            const data =
+                await loginRequest(form);
+
 
             login(data);
 
+
             navigate("/");
 
+
         } catch (error) {
+
             setError(
-                error.response?.data?.message ||
                 "Login failed"
             );
+
         }
+
     };
 
+
     return (
+
         <div className="form-container">
 
             <h2>
                 Login
             </h2>
 
+
             {
-                error && <p>{error}</p>
+                error &&
+                <p>
+                    {error}
+                </p>
             }
 
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={submit}>
 
                 <input
+                    name="email"
                     type="email"
                     placeholder="Email"
-                    value={email}
-                    onChange={(e) =>
-                        setEmail(e.target.value)
-                    }
+                    value={form.email}
+                    onChange={handleChange}
                 />
 
+
                 <input
+                    name="password"
                     type="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) =>
-                        setPassword(e.target.value)
-                    }
+                    value={form.password}
+                    onChange={handleChange}
                 />
+
 
                 <FormButton>
                     Login
@@ -74,7 +104,10 @@ function Login() {
             </form>
 
         </div>
+
     );
+
 }
+
 
 export default Login;
