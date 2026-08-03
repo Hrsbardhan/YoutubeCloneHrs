@@ -1,76 +1,163 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import VideoCard from "../components/VideoCard";
+import "../styles/channel.css";
 
-function ChannelPage() {
+function ChannelPage(){
 
     const { id } = useParams();
 
-    const [channel, setChannel] = useState(null);
-    const [videos, setVideos] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const [channel,setChannel]=useState(null);
+    const [videos,setVideos]=useState([]);
+    const [loading,setLoading]=useState(true);
+    const [error,setError]=useState("");
 
-    useEffect(() => {
+    useEffect(()=>{
+
         loadChannel();
-    }, [id]);
 
-    const loadChannel = async () => {
+    },[id]);
 
-        try {
+    async function loadChannel(){
 
-            const channelRes = await api.get(`/channels/${id}`);
+        try{
+
+            const channelRes=await api.get(`/channels/${id}`);
             setChannel(channelRes.data);
 
-            const videoRes = await api.get("/videos");
+            try{
 
-            const filtered = videoRes.data.filter(
-                video =>
-                    video.channel?._id === id ||
-                    video.channel === id
-            );
+                const videoRes=await api.get(`/videos?channel=${id}`);
+                setVideos(videoRes.data);
 
-            setVideos(filtered);
+            }catch{
 
-        } catch {
+                setVideos([]);
 
-            setError("Unable to load channel");
+            }
 
-        } finally {
+        }
+        catch{
+
+            setError("Unable to load channel.");
+
+        }
+        finally{
 
             setLoading(false);
 
         }
 
-    };
+    }
 
-    if (loading) return <Loading />;
+    if(loading) return <Loading/>;
 
-    if (error) return <ErrorMessage message={error} />;
+    if(error) return <ErrorMessage message={error}/>;
 
-    return (
+    return(
 
-        <div>
+        <div className="channel-page">
 
-            <h1>{channel.name}</h1>
+            <div className="channel-banner"></div>
 
-            <p>{channel.description}</p>
+            <section className="channel-header">
 
-            <h2>Videos</h2>
+                <div className="channel-avatar">
 
-            {
-                videos.length
-                    ? videos.map(video => (
+                    {
+                        channel?.name?.charAt(0)?.toUpperCase() || "C"
+                    }
+
+                </div>
+
+                <div className="channel-details">
+
+                    <h1>
+
+                        {channel.name}
+
+                    </h1>
+
+                    <p>
+
+                        {channel.description || "No description available."}
+
+                    </p>
+
+                    <span>
+
+                        {(channel.subscribers || 0)} Subscribers
+
+                    </span>
+
+                </div>
+
+                <button className="subscribe-button">
+
+                    Subscribe
+
+                </button>
+
+            </section>
+
+            <nav className="channel-tabs">
+
+                <button className="active">
+
+                    Home
+
+                </button>
+
+                <button>
+
+                    Videos
+
+                </button>
+
+                <button>
+
+                    Playlists
+
+                </button>
+
+                <button>
+
+                    About
+
+                </button>
+
+            </nav>
+
+            <section className="channel-video-grid">
+
+                {
+
+                    videos.length
+                    ?
+
+                    videos.map(video=>
+
                         <VideoCard
                             key={video._id}
                             video={video}
                         />
-                    ))
-                    : <p>No videos available.</p>
-            }
+
+                    )
+
+                    :
+
+                    <p className="empty-message">
+
+                        No videos uploaded yet.
+
+                    </p>
+
+                }
+
+            </section>
 
         </div>
 
