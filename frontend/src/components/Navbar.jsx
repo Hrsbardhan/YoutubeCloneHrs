@@ -1,4 +1,4 @@
-﻿import { useContext } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 
@@ -63,3 +63,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

@@ -1,25 +1,29 @@
-﻿import api from "./api";
+import api from "./api";
 
+export const register = async (payload) => {
+    const { data } = await api.post("/auth/register", payload);
 
-export const register = async (data) => {
+    if (data.token) {
+        localStorage.setItem("token", data.token);
+    }
 
-    const response = await api.post(
-        "/auth/register",
-        data
-    );
-
-    return response.data;
-
+    return data;
 };
 
+export const login = async (payload) => {
+    const { data } = await api.post("/auth/login", payload);
 
-export const login = async (data) => {
+    if (data.token) {
+        localStorage.setItem("token", data.token);
+    }
 
-    const response = await api.post(
-        "/auth/login",
-        data
-    );
+    return data;
+};
 
-    return response.data;
+export const logout = () => {
+    localStorage.removeItem("token");
+};
 
+export const isAuthenticated = () => {
+    return !!localStorage.getItem("token");
 };
