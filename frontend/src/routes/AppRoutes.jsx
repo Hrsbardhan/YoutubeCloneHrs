@@ -4,6 +4,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import VideoDetails from "../pages/VideoDetails";
+import WatchPage from "../pages/WatchPage";
 import ChannelList from "../pages/ChannelList";
 import ChannelPage from "../pages/ChannelPage";
 import CreateChannel from "../pages/CreateChannel";
@@ -42,7 +43,7 @@ function AppRoutes() {
 
                     <Route path="/search" element={<Search />} />
 
-                    <Route path="/video/:id" element={<VideoDetails />} />
+                    <Route path="/video/:id" element={<WatchPage />} />
 
                     <Route path="/video/:videoId/comments" element={<Comments />} />
 
@@ -148,6 +149,7 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
+
 
 
 
