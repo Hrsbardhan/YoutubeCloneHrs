@@ -32,3 +32,10 @@
 - Connected videos API
 - Added dynamic video cards
 - Added video details navigation
+
+## 2026-08-03
+
+- Added Edit Video page
+- Integrated PUT /videos/:id
+- Added Video Management edit workflow
+- Video CRUD frontend completed

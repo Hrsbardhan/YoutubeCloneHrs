@@ -1,17 +1,23 @@
-﻿# TASKS
+# TASKS
 
 Completed:
 [x] Backend APIs
 [x] Authentication UI
-[x] Video listing UI
+[x] Video Listing UI
+[x] Video Upload Frontend
+[x] Video Edit Frontend
+[x] Video Management Dashboard
 
 Current:
-[ ] Video Upload Frontend
+[ ] Channel CRUD Frontend
 
 Remaining:
 [ ] Channel Dashboard
-[ ] Playlist UI improvements
-[ ] Search UI
+[ ] Channel Edit
+[ ] Channel Delete
+[ ] Playlist UI Improvements
+[ ] Search Improvements
 [ ] Responsive Design
 [ ] Final Regression
-[ ] Capstone Cleanup
+[ ] Documentation Cleanup
+[ ] Capstone Verification
