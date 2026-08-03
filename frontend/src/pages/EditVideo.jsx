@@ -1,124 +1,160 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+﻿import { useEffect,useState } from "react";
+import { useNavigate,useParams } from "react-router-dom";
 import api from "../services/api";
+import "../styles/editVideo.css";
 
-function EditVideo() {
+function EditVideo(){
 
-    const { id } = useParams();
+    const {id}=useParams();
+    const navigate=useNavigate();
 
-    const navigate = useNavigate();
+    const [loading,setLoading]=useState(true);
 
-    const [form, setForm] = useState({
-        title: "",
-        description: "",
-        videoUrl: "",
-        thumbnailUrl: "",
-        category: ""
+    const [form,setForm]=useState({
+
+        title:"",
+        description:"",
+        category:"",
+        thumbnailUrl:"",
+        videoUrl:""
+
     });
 
-    const [error, setError] = useState("");
+    useEffect(()=>{
 
-    useEffect(() => {
         loadVideo();
-    }, []);
 
-    const loadVideo = async () => {
+    },[]);
 
-        try {
+    async function loadVideo(){
 
-            const { data } = await api.get(`/videos/${id}`);
+        try{
+
+            const {data}=await api.get(`/videos/${id}`);
 
             setForm({
-                title: data.title || "",
-                description: data.description || "",
-                videoUrl: data.videoUrl || "",
-                thumbnailUrl: data.thumbnailUrl || "",
-                category: data.category || ""
+
+                title:data.title || "",
+                description:data.description || "",
+                category:data.category || "",
+                thumbnailUrl:data.thumbnailUrl || "",
+                videoUrl:data.videoUrl || ""
+
             });
 
-        } catch {
+        }
+        catch{
 
-            setError("Unable to load video");
+            alert("Unable to load video.");
+
+        }
+        finally{
+
+            setLoading(false);
 
         }
 
-    };
+    }
 
-    const handleChange = (e) => {
+    function handleChange(e){
 
         setForm({
+
             ...form,
-            [e.target.name]: e.target.value
+            [e.target.name]:e.target.value
+
         });
 
-    };
+    }
 
-    const submit = async (e) => {
+    async function handleSubmit(e){
 
         e.preventDefault();
 
-        try {
+        try{
 
-            await api.put(`/videos/${id}`, form);
+            await api.put(`/videos/${id}`,form);
 
-            navigate("/manage/videos");
+            alert("Video updated successfully.");
 
-        } catch {
+            navigate("/dashboard");
 
-            setError("Unable to update video");
+        }
+        catch{
+
+            alert("Update failed.");
 
         }
 
-    };
+    }
 
-    return (
+    if(loading){
 
-        <div className="form-container">
+        return <h2 style={{color:"white"}}>Loading...</h2>;
 
-            <h2>Edit Video</h2>
+    }
 
-            {error && <p>{error}</p>}
+    return(
 
-            <form onSubmit={submit}>
+        <div className="edit-video-page">
 
-                <input
-                    name="title"
-                    value={form.title}
-                    onChange={handleChange}
-                    placeholder="Title"
-                />
+            <div className="edit-video-card">
 
-                <textarea
-                    name="description"
-                    value={form.description}
-                    onChange={handleChange}
-                    placeholder="Description"
-                />
+                <h1>Edit Video</h1>
 
-                <input
-                    name="videoUrl"
-                    value={form.videoUrl}
-                    onChange={handleChange}
-                    placeholder="Video URL"
-                />
+                <form onSubmit={handleSubmit}>
 
-                <input
-                    name="thumbnailUrl"
-                    value={form.thumbnailUrl}
-                    onChange={handleChange}
-                    placeholder="Thumbnail URL"
-                />
+                    <label>Title</label>
 
-                <input
-                    name="category"
-                    value={form.category}
-                    onChange={handleChange}
-                    placeholder="Category"
-                />
+                    <input
+                        name="title"
+                        value={form.title}
+                        onChange={handleChange}
+                        required
+                    />
 
-                <button>Update Video</button>
+                    <label>Description</label>
 
-            </form>
+                    <textarea
+                        rows="5"
+                        name="description"
+                        value={form.description}
+                        onChange={handleChange}
+                    />
+
+                    <label>Category</label>
+
+                    <input
+                        name="category"
+                        value={form.category}
+                        onChange={handleChange}
+                    />
+
+                    <label>Thumbnail URL</label>
+
+                    <input
+                        name="thumbnailUrl"
+                        value={form.thumbnailUrl}
+                        onChange={handleChange}
+                    />
+
+                    <label>Video URL</label>
+
+                    <input
+                        name="videoUrl"
+                        value={form.videoUrl}
+                        onChange={handleChange}
+                    />
+
+                    <button type="submit">
+
+                        Save Changes
+
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
 
