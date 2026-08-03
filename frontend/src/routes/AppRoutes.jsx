@@ -11,6 +11,7 @@ import ChannelManager from "../pages/ChannelManager";
 import EditChannel from "../pages/EditChannel";
 import Playlist from "../pages/Playlist";
 import CreatePlaylist from "../pages/CreatePlaylist";
+import PlaylistDetails from "../pages/PlaylistDetails";
 import Comments from "../pages/Comments";
 import Search from "../pages/Search";
 import UploadVideo from "../pages/UploadVideo";
@@ -127,5 +128,6 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
+
 
 
