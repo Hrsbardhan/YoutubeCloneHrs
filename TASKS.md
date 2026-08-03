@@ -3,12 +3,16 @@
 Completed:
 [x] Video CRUD
 [x] Channel CRUD
+[x] Playlist CRUD
 
 Current:
-[ ] Playlist CRUD
+[ ] Frontend Authentication Integration
 
 Remaining:
-[ ] Frontend API integration
-[ ] Responsive UI
-[ ] Final regression testing
-[ ] Capstone submission cleanup
+[ ] Home API integration improvements
+[ ] Watch page
+[ ] Channel UI
+[ ] Playlist UI
+[ ] Responsive Design
+[ ] Final Regression
+[ ] Capstone Cleanup

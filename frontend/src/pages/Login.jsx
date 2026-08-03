@@ -1,101 +1,62 @@
-﻿import { useState } from "react";
+﻿import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { login as loginRequest } from "../services/authService";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 import FormButton from "../components/FormButton";
+import { AuthContext } from "../context/AuthContext";
+import { login as loginRequest } from "../services/authService";
 
 function Login() {
 
     const navigate = useNavigate();
 
-    const {
-        login
-    } = useContext(AuthContext);
-
+    const { login } = useContext(AuthContext);
 
     const [form, setForm] = useState({
         email: "",
         password: ""
     });
 
-
-    const [error, setError] = useState("");
-
-
-    const handleChange = (e) => {
-
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-
-    };
-
-
     const submit = async (e) => {
-
         e.preventDefault();
 
-        try {
+        const response = await loginRequest(form);
 
-            const data =
-                await loginRequest(form);
+        login(response);
 
-
-            login(data);
-
-
-            navigate("/");
-
-
-        } catch (error) {
-
-            setError(
-                "Login failed"
-            );
-
-        }
-
+        navigate("/");
     };
 
-
     return (
-
         <div className="form-container">
 
             <h2>
                 Login
             </h2>
 
-
-            {
-                error &&
-                <p>
-                    {error}
-                </p>
-            }
-
-
             <form onSubmit={submit}>
 
                 <input
-                    name="email"
                     type="email"
                     placeholder="Email"
                     value={form.email}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            email: e.target.value
+                        })
+                    }
                 />
 
-
                 <input
-                    name="password"
                     type="password"
                     placeholder="Password"
                     value={form.password}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            password: e.target.value
+                        })
+                    }
                 />
-
 
                 <FormButton>
                     Login
@@ -104,10 +65,7 @@ function Login() {
             </form>
 
         </div>
-
     );
-
 }
-
 
 export default Login;

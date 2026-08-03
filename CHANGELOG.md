@@ -15,3 +15,9 @@
 - Added channel update API
 - Added channel delete API
 - Added owner authorization validation
+
+## Playlist CRUD Completion
+- Added playlist update API
+- Added playlist delete API
+- Added playlist ownership validation
+- Added playlist video removal API

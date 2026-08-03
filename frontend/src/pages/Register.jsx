@@ -1,13 +1,11 @@
 ﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register as registerRequest } from "../services/authService";
 import FormButton from "../components/FormButton";
-
+import { register } from "../services/authService";
 
 function Register() {
 
     const navigate = useNavigate();
-
 
     const [form, setForm] = useState({
         username: "",
@@ -15,103 +13,66 @@ function Register() {
         password: ""
     });
 
-
-    const [error, setError] = useState("");
-
-
-    const handleChange = (e) => {
-
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-
-    };
-
-
     const submit = async (e) => {
-
         e.preventDefault();
 
+        await register(form);
 
-        try {
-
-            await registerRequest(form);
-
-
-            navigate("/login");
-
-
-        } catch (error) {
-
-            setError(
-                "Registration failed"
-            );
-
-        }
-
+        navigate("/login");
     };
 
-
     return (
-
         <div className="form-container">
 
             <h2>
                 Register
             </h2>
 
-
-            {
-                error &&
-                <p>
-                    {error}
-                </p>
-            }
-
-
             <form onSubmit={submit}>
 
-
                 <input
-                    name="username"
                     placeholder="Username"
                     value={form.username}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            username: e.target.value
+                        })
+                    }
                 />
 
-
                 <input
-                    name="email"
                     type="email"
                     placeholder="Email"
                     value={form.email}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            email: e.target.value
+                        })
+                    }
                 />
 
-
                 <input
-                    name="password"
                     type="password"
                     placeholder="Password"
                     value={form.password}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                        setForm({
+                            ...form,
+                            password: e.target.value
+                        })
+                    }
                 />
-
 
                 <FormButton>
                     Register
                 </FormButton>
 
-
             </form>
 
-
         </div>
-
     );
-
 }
-
 
 export default Register;
