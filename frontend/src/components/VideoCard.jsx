@@ -1,46 +1,56 @@
 ﻿import { Link } from "react-router-dom";
-import Card from "./Card";
+import "../styles/videoCard.css";
 
-function VideoCard({
-    video
-}) {
+function VideoCard({ video }) {
 
     return (
 
-        <Card>
+        <Link
+            to={`/video/${video._id}`}
+            className="video-card"
+        >
 
-            <Link
-                to={`/video/${video._id}`}
-            >
+            <img
+                className="video-thumbnail"
+                src={
+                    video.thumbnailUrl ||
+                    "https://placehold.co/640x360?text=Thumbnail"
+                }
+                alt={video.title}
+            />
 
-                <h3>
-                    {video.title}
-                </h3>
+            <div className="video-info">
 
-            </Link>
+                <div className="video-avatar">
 
+                    {video.owner?.username?.charAt(0).toUpperCase() || "U"}
 
-            <p>
-                {video.description}
-            </p>
+                </div>
 
+                <div className="video-meta">
 
-            <p>
-                Views:
-                {" "}
-                {video.views}
-            </p>
+                    <h3>
+                        {video.title}
+                    </h3>
 
+                    <p>
+                        {video.owner?.username || "Unknown Channel"}
+                    </p>
 
-            <p>
-                Category:
-                {" "}
-                {video.category}
-            </p>
+                    <span>
 
-        </Card>
+                        {video.views || 0} views
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </Link>
 
     );
+
 }
 
 export default VideoCard;
