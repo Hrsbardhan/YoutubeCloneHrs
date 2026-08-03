@@ -1,8 +1,8 @@
 ﻿import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import FormButton from "../components/FormButton";
+import { login as loginService } from "../services/authService";
 import { AuthContext } from "../context/AuthContext";
-import { login as loginRequest } from "../services/authService";
 
 function Login() {
 
@@ -15,48 +15,77 @@ function Login() {
         password: ""
     });
 
-    const submit = async (e) => {
-        e.preventDefault();
+    const [error, setError] = useState("");
 
-        const response = await loginRequest(form);
+    const handleChange = (e) => {
 
-        login(response);
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
 
-        navigate("/");
     };
 
+
+    const submit = async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            const response = await loginService(form);
+
+            login(response);
+
+            navigate("/");
+
+        } catch (error) {
+
+            setError(
+                "Login failed"
+            );
+
+        }
+
+    };
+
+
     return (
+
         <div className="form-container">
 
             <h2>
                 Login
             </h2>
 
+
+            {
+                error &&
+                <p>
+                    {error}
+                </p>
+            }
+
+
             <form onSubmit={submit}>
 
                 <input
+                    name="email"
                     type="email"
                     placeholder="Email"
                     value={form.email}
-                    onChange={(e) =>
-                        setForm({
-                            ...form,
-                            email: e.target.value
-                        })
-                    }
+                    onChange={handleChange}
                 />
 
+
                 <input
+                    name="password"
                     type="password"
                     placeholder="Password"
                     value={form.password}
-                    onChange={(e) =>
-                        setForm({
-                            ...form,
-                            password: e.target.value
-                        })
-                    }
+                    onChange={handleChange}
                 />
+
 
                 <FormButton>
                     Login
@@ -65,6 +94,7 @@ function Login() {
             </form>
 
         </div>
+
     );
 }
 

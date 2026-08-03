@@ -1,7 +1,7 @@
 ﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormButton from "../components/FormButton";
-import { register } from "../services/authService";
+import { register as registerService } from "../services/authService";
 
 function Register() {
 
@@ -13,57 +13,84 @@ function Register() {
         password: ""
     });
 
-    const submit = async (e) => {
-        e.preventDefault();
+    const [error, setError] = useState("");
 
-        await register(form);
 
-        navigate("/login");
+    const handleChange = (e) => {
+
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+
     };
 
+
+    const submit = async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            await registerService(form);
+
+            navigate("/login");
+
+        } catch (error) {
+
+            setError(
+                "Registration failed"
+            );
+
+        }
+
+    };
+
+
     return (
+
         <div className="form-container">
 
             <h2>
                 Register
             </h2>
 
+
+            {
+                error &&
+                <p>
+                    {error}
+                </p>
+            }
+
+
             <form onSubmit={submit}>
 
                 <input
+                    name="username"
                     placeholder="Username"
                     value={form.username}
-                    onChange={(e) =>
-                        setForm({
-                            ...form,
-                            username: e.target.value
-                        })
-                    }
+                    onChange={handleChange}
                 />
 
+
                 <input
+                    name="email"
                     type="email"
                     placeholder="Email"
                     value={form.email}
-                    onChange={(e) =>
-                        setForm({
-                            ...form,
-                            email: e.target.value
-                        })
-                    }
+                    onChange={handleChange}
                 />
 
+
                 <input
+                    name="password"
                     type="password"
                     placeholder="Password"
                     value={form.password}
-                    onChange={(e) =>
-                        setForm({
-                            ...form,
-                            password: e.target.value
-                        })
-                    }
+                    onChange={handleChange}
                 />
+
 
                 <FormButton>
                     Register
@@ -72,6 +99,7 @@ function Register() {
             </form>
 
         </div>
+
     );
 }
 
