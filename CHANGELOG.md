@@ -1,7 +1,9 @@
-﻿## v0.3.0
+﻿## v0.5.0
 
-- Frontend architecture completed
-- Shared components completed
-- Responsive styling completed
-- Authentication UI improved
-- Final frontend polishing completed
+- Backend runtime verified
+- MongoDB verified
+- Authentication verified
+- JWT verified
+- Search endpoint verified
+- Comments endpoint verified
+- Documentation synchronized
