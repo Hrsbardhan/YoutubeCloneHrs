@@ -2,6 +2,9 @@
 
 Completed:
 [x] Authentication Backend
+[x] Authentication Frontend
+[x] Protected Routes
+[x] Logout Flow
 [x] Video CRUD Backend
 [x] Video CRUD Frontend
 [x] Channel CRUD Backend
@@ -10,16 +13,15 @@ Completed:
 [x] Playlist CRUD Frontend
 
 Current:
-[ ] Authentication UI Completion
+[ ] Watch Page Integration
 
 Remaining:
-[ ] Register Verification
-[ ] Login Verification
-[ ] Logout
-[ ] Protected Navigation
-[ ] Watch Page
 [ ] Related Videos
+[ ] Channel Details API
+[ ] Search UI Improvements
 [ ] Responsive Design
+[ ] Loading Improvements
+[ ] Error Handling
 [ ] Final Regression
 [ ] Documentation Cleanup
 [ ] Capstone Verification
