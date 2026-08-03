@@ -1,18 +1,8 @@
+import SkeletonGrid from "./SkeletonGrid";
+
 function Loading(){
 
-    return(
-
-        <div
-            style={{
-                padding:"30px",
-                textAlign:"center",
-                fontWeight:"bold"
-            }}
-        >
-            Loading...
-        </div>
-
-    );
+return <SkeletonGrid/>;
 
 }
 
