@@ -9,3 +9,9 @@
 - Added update video API
 - Added delete video API
 - Added owner authorization checks
+
+## Channel CRUD Completion
+- Added channel get by id
+- Added channel update API
+- Added channel delete API
+- Added owner authorization validation

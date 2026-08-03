@@ -2,12 +2,13 @@
 
 Completed:
 [x] Video CRUD
+[x] Channel CRUD
 
-In Progress:
-[ ] Channel CRUD
+Current:
+[ ] Playlist CRUD
 
 Remaining:
-[ ] Playlist CRUD completion
 [ ] Frontend API integration
 [ ] Responsive UI
 [ ] Final regression testing
+[ ] Capstone submission cleanup
