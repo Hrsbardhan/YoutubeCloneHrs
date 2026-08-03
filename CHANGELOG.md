@@ -27,3 +27,8 @@
 - Connected register API
 - Added JWT storage flow
 - Added AuthContext integration
+
+## Video Listing Frontend
+- Connected videos API
+- Added dynamic video cards
+- Added video details navigation

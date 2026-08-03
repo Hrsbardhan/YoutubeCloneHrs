@@ -8,7 +8,7 @@ import CreateChannel from "../pages/CreateChannel";
 import Playlist from "../pages/Playlist";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Comments from "../pages/Comments";
-import Search from "../pages/Search";
+import Search from "../pages/Search";`nimport UploadVideo from "../pages/UploadVideo";
 import MainLayout from "../layouts/MainLayout";
 
 function AppRoutes() {
@@ -66,6 +66,12 @@ function AppRoutes() {
                         path="/playlists/create"
                         element={<CreatePlaylist />}
                     />
+
+                
+<Route
+    path="/upload"
+    element={<UploadVideo />}
+/>
 
                 </Routes>
             </MainLayout>

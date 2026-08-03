@@ -3,15 +3,15 @@
 Completed:
 [x] Backend APIs
 [x] Authentication UI
-[x] Login/Register Integration
+[x] Video listing UI
 
 Current:
-[ ] Video Frontend Integration
+[ ] Video Upload Frontend
 
 Remaining:
-[ ] Upload Video UI
 [ ] Channel Dashboard
 [ ] Playlist UI improvements
+[ ] Search UI
 [ ] Responsive Design
 [ ] Final Regression
 [ ] Capstone Cleanup
