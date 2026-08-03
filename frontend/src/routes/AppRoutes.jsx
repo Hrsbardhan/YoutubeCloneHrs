@@ -8,6 +8,7 @@ import ChannelList from "../pages/ChannelList";
 import ChannelPage from "../pages/ChannelPage";
 import CreateChannel from "../pages/CreateChannel";
 import ChannelManager from "../pages/ChannelManager";
+import EditChannel from "../pages/EditChannel";
 import Playlist from "../pages/Playlist";
 import CreatePlaylist from "../pages/CreatePlaylist";
 import Comments from "../pages/Comments";
@@ -107,6 +108,14 @@ function AppRoutes() {
         </ProtectedRoute>
     }
 />
+<Route
+    path="/manage/channels/:id/edit"
+    element={
+        <ProtectedRoute>
+            <EditChannel />
+        </ProtectedRoute>
+    }
+/>
 </Routes>
 
             </MainLayout>
@@ -118,4 +127,5 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
+
 
