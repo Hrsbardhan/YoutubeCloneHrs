@@ -1,10 +1,13 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 
 function VideoManager() {
+
+    const navigate = useNavigate();
 
     const [videos, setVideos] = useState([]);
 
@@ -111,6 +114,12 @@ function VideoManager() {
                             }
                         >
                             Delete
+                        </button>
+
+                        <button
+                            onClick={() => navigate(`/manage/videos/$($video._id)/edit`.Replace("$($video._id)","${video._id}"))}
+                        >
+                            Edit
                         </button>
 
                     </Card>

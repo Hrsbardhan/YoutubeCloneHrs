@@ -1,4 +1,4 @@
-﻿import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Register from "../pages/Register";
 import Login from "../pages/Login";
@@ -13,6 +13,7 @@ import Comments from "../pages/Comments";
 import Search from "../pages/Search";
 import UploadVideo from "../pages/UploadVideo";
 import VideoManager from "../pages/VideoManager";
+import EditVideo from "../pages/EditVideo";
 
 import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -89,6 +90,14 @@ function AppRoutes() {
                         }
                     />
 
+                <Route
+                        path="/manage/videos/:id/edit"
+                        element={
+                            <ProtectedRoute>
+                                <EditVideo />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
 
             </MainLayout>
