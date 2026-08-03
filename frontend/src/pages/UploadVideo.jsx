@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
@@ -6,16 +6,40 @@ function UploadVideo() {
 
     const navigate = useNavigate();
 
+    const [channels, setChannels] = useState([]);
+
     const [form, setForm] = useState({
         title: "",
         description: "",
         videoUrl: "",
         thumbnailUrl: "",
-        category: ""
+        category: "",
+        channel: ""
     });
 
     const [error, setError] = useState("");
 
+    useEffect(() => {
+
+        const loadChannels = async () => {
+
+            try {
+
+                const response = await api.get("/channels");
+
+                setChannels(response.data);
+
+            } catch (error) {
+
+                console.log(error);
+
+            }
+
+        };
+
+        loadChannels();
+
+    }, []);
 
     const handleChange = (e) => {
 
@@ -26,23 +50,20 @@ function UploadVideo() {
 
     };
 
-
     const submit = async (e) => {
 
         e.preventDefault();
 
         try {
 
-            await api.post(
-                "/videos",
-                form
-            );
+            await api.post("/videos", form);
 
             navigate("/");
 
         } catch (error) {
 
             setError(
+                error.response?.data?.message ||
                 "Unable to upload video"
             );
 
@@ -50,23 +71,16 @@ function UploadVideo() {
 
     };
 
-
     return (
 
         <div className="form-container">
 
-            <h2>
-                Upload Video
-            </h2>
-
+            <h2>Upload Video</h2>
 
             {
                 error &&
-                <p>
-                    {error}
-                </p>
+                <p>{error}</p>
             }
-
 
             <form onSubmit={submit}>
 
@@ -75,8 +89,8 @@ function UploadVideo() {
                     placeholder="Title"
                     value={form.title}
                     onChange={handleChange}
+                    required
                 />
-
 
                 <textarea
                     name="description"
@@ -85,14 +99,13 @@ function UploadVideo() {
                     onChange={handleChange}
                 />
 
-
                 <input
                     name="videoUrl"
                     placeholder="Video URL"
                     value={form.videoUrl}
                     onChange={handleChange}
+                    required
                 />
-
 
                 <input
                     name="thumbnailUrl"
@@ -101,7 +114,6 @@ function UploadVideo() {
                     onChange={handleChange}
                 />
 
-
                 <input
                     name="category"
                     placeholder="Category"
@@ -109,8 +121,32 @@ function UploadVideo() {
                     onChange={handleChange}
                 />
 
+                <select
+                    name="channel"
+                    value={form.channel}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">
+                        Select Channel
+                    </option>
 
-                <button>
+                    {
+                        channels.map((channel) => (
+
+                            <option
+                                key={channel._id}
+                                value={channel._id}
+                            >
+                                {channel.name}
+                            </option>
+
+                        ))
+                    }
+
+                </select>
+
+                <button type="submit">
                     Upload
                 </button>
 

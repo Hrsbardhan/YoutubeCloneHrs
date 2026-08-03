@@ -14,7 +14,6 @@ import { validateRequest } from "../middleware/validateRequest.js";
 
 const router = express.Router();
 
-
 router.get("/", getVideos);
 
 router.get("/:id", getVideoById);
@@ -27,21 +26,18 @@ router.post(
     createVideo
 );
 
-
 router.put(
-    "//:id",
+    "/:id",
     protect,
     videoValidationRules,
     validateRequest,
     updateVideo
 );
 
-
 router.delete(
-    "//:id",
+    "/:id",
     protect,
     deleteVideo
 );
-
 
 export default router;
