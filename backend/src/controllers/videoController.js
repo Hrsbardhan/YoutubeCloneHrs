@@ -9,11 +9,12 @@ export const createVideo = async (req, res) => {
 
         res.status(201).json(video);
     } catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             message: error.message
         });
     }
 };
+
 
 export const getVideos = async (req, res) => {
     try {
@@ -29,6 +30,7 @@ export const getVideos = async (req, res) => {
     }
 };
 
+
 export const getVideoById = async (req, res) => {
     try {
         const video = await Video.findById(req.params.id)
@@ -42,15 +44,18 @@ export const getVideoById = async (req, res) => {
         }
 
         video.views += 1;
+
         await video.save();
 
         res.json(video);
+
     } catch (error) {
         res.status(500).json({
             message: error.message
         });
     }
 };
+
 
 export const updateVideo = async (req, res) => {
     try {
@@ -77,12 +82,14 @@ export const updateVideo = async (req, res) => {
         await video.save();
 
         res.json(video);
+
     } catch (error) {
         res.status(500).json({
             message: error.message
         });
     }
 };
+
 
 export const deleteVideo = async (req, res) => {
     try {
@@ -105,6 +112,7 @@ export const deleteVideo = async (req, res) => {
         res.json({
             message: "Video deleted"
         });
+
     } catch (error) {
         res.status(500).json({
             message: error.message
