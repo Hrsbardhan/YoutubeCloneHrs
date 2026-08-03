@@ -4,3 +4,8 @@
 - Video endpoint verified
 - Backend verification complete
 - Ready for Video CRUD implementation
+
+## Video CRUD Completion
+- Added update video API
+- Added delete video API
+- Added owner authorization checks
