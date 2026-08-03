@@ -1,119 +1,85 @@
-﻿import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../services/api";
+import VideoCard from "../components/VideoCard";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
-import VideoCard from "../components/VideoCard";
 
 function Search() {
 
     const [query, setQuery] = useState("");
-
-    const [category, setCategory] = useState("");
-
-    const [videos, setVideos] = useState([]);
-
+    const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
-
     const [error, setError] = useState("");
 
+    useEffect(() => {
 
-    const searchVideos = async (e) => {
+        if (!query.trim()) {
 
-        e.preventDefault();
+            setResults([]);
+
+            return;
+
+        }
+
+        const timer = setTimeout(searchVideos,300);
+
+        return ()=>clearTimeout(timer);
+
+    }, [query]);
+
+    const searchVideos = async () => {
+
+        setLoading(true);
 
         try {
 
-            setLoading(true);
+            const { data } = await api.get(
+                `/search?query=${encodeURIComponent(query)}`
+            );
+
+            setResults(data);
 
             setError("");
 
-            const response = await api.get(
-                "/search",
-                {
-                    params: {
-                        query,
-                        category
-                    }
-                }
-            );
+        } catch {
 
-            setVideos(response.data);
-
-        } catch (error) {
-
-            setError(
-                "Search failed"
-            );
+            setError("Search failed");
 
         } finally {
 
             setLoading(false);
 
         }
+
     };
 
-
     return (
+
         <div>
 
-            <form onSubmit={searchVideos}>
+            <input
+                placeholder="Search videos..."
+                value={query}
+                onChange={e=>setQuery(e.target.value)}
+            />
 
-                <input
-                    value={query}
-                    placeholder="Search videos"
-                    onChange={(e) =>
-                        setQuery(e.target.value)
-                    }
-                />
+            {loading && <Loading />}
 
-
-                <input
-                    value={category}
-                    placeholder="Category"
-                    onChange={(e) =>
-                        setCategory(e.target.value)
-                    }
-                />
-
-
-                <button>
-                    Search
-                </button>
-
-            </form>
-
+            {error && <ErrorMessage message={error} />}
 
             {
-                loading &&
-                <Loading />
+                results.map(video=>(
+                    <VideoCard
+                        key={video._id}
+                        video={video}
+                    />
+                ))
             }
-
-
-            {
-                error &&
-                <ErrorMessage
-                    message={error}
-                />
-            }
-
-
-            <div className="video-grid">
-
-                {
-                    videos.map((video) => (
-
-                        <VideoCard
-                            key={video._id}
-                            video={video}
-                        />
-
-                    ))
-                }
-
-            </div>
 
         </div>
+
     );
+
 }
 
 export default Search;
