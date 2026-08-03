@@ -11,6 +11,7 @@ import CreatePlaylist from "../pages/CreatePlaylist";
 import Comments from "../pages/Comments";
 import Search from "../pages/Search";
 import UploadVideo from "../pages/UploadVideo";
+import VideoManager from "../pages/VideoManager";
 
 import MainLayout from "../layouts/MainLayout";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -72,6 +73,15 @@ function AppRoutes() {
                         element={
                             <ProtectedRoute>
                                 <UploadVideo />
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/manage/videos"
+                        element={
+                            <ProtectedRoute>
+                                <VideoManager />
                             </ProtectedRoute>
                         }
                     />
