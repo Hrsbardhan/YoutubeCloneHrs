@@ -3,103 +3,145 @@ import { useParams } from "react-router-dom";
 import api from "../services/api";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
-import Card from "../components/Card";
-import Comments from "./Comments";
+import "../styles/watch.css";
 
 function VideoDetails() {
 
-    const {
-        id
-    } = useParams();
+    const { id } = useParams();
 
-    const [video, setVideo] = useState(null);
+    const [video,setVideo] = useState(null);
+    const [loading,setLoading] = useState(true);
+    const [error,setError] = useState("");
 
-    const [loading, setLoading] = useState(true);
+    useEffect(()=>{
 
-    const [error, setError] = useState("");
+        fetchVideo();
 
-    useEffect(() => {
+    },[id]);
 
-        const loadVideo = async () => {
+    async function fetchVideo(){
 
-            try {
+        try{
 
-                const response = await api.get(
-                    `/videos/${id}`
-                );
+            const {data}=await api.get(`/videos/${id}`);
 
-                setVideo(response.data);
+            setVideo(data);
 
-            } catch (error) {
+        }
+        catch{
 
-                setError(
-                    "Unable to load video"
-                );
+            setError("Unable to load video.");
 
-            } finally {
+        }
+        finally{
 
-                setLoading(false);
+            setLoading(false);
 
-            }
-        };
+        }
 
-        loadVideo();
-
-    }, [id]);
-
-
-    if (loading) {
-        return <Loading />;
     }
 
+    if(loading) return <Loading/>;
 
-    if (error) {
-        return (
-            <ErrorMessage
-                message={error}
-            />
-        );
-    }
+    if(error) return <ErrorMessage message={error}/>;
 
+    return(
 
-    return (
+        <div className="watch-page">
 
-        <>
-
-            <Card>
-
-                <h1>
-                    {video.title}
-                </h1>
-
+            <section className="watch-main">
 
                 <video
+                    className="watch-player"
                     controls
-                    width="100%"
                     src={video.videoUrl}
                 />
 
+                <h2 className="watch-title">
+
+                    {video.title}
+
+                </h2>
+
+                <div className="watch-stats">
+
+                    <span>{video.views || 0} views</span>
+
+                    <div className="watch-actions">
+
+                        <button>👍 Like</button>
+
+                        <button>👎 Dislike</button>
+
+                        <button>↗ Share</button>
+
+                        <button>💾 Save</button>
+
+                    </div>
+
+                </div>
+
+                <div className="channel-box">
+
+                    <div className="channel-avatar">
+
+                        {video.owner?.username?.charAt(0).toUpperCase() || "U"}
+
+                    </div>
+
+                    <div className="channel-info">
+
+                        <h4>
+
+                            {video.owner?.username || "Unknown"}
+
+                        </h4>
+
+                        <p>Creator</p>
+
+                    </div>
+
+                    <button className="subscribe-btn">
+
+                        Subscribe
+
+                    </button>
+
+                </div>
+
+                <div className="description-box">
+
+                    <p>
+
+                        {video.description || "No description available."}
+
+                    </p>
+
+                </div>
+
+            </section>
+
+            <aside className="related-videos">
+
+                <h3>
+
+                    Related Videos
+
+                </h3>
 
                 <p>
-                    {video.description}
+
+                    Related videos section will be integrated during
+                    Frontend API Integration milestone.
+
                 </p>
 
+            </aside>
 
-                <p>
-                    Views:
-                    {" "}
-                    {video.views}
-                </p>
-
-
-            </Card>
-
-
-            <Comments />
-
-        </>
+        </div>
 
     );
+
 }
 
 export default VideoDetails;
