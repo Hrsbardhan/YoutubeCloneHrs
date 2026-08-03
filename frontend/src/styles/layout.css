@@ -1,56 +1,44 @@
-﻿*{
-    box-sizing:border-box;
-}
-
 body{
 
-    margin:0;
+margin:0;
 
-    background:#0f0f0f;
+background:#0f0f0f;
 
-    color:#ffffff;
+color:white;
 
-    font-family:Roboto,Arial,sans-serif;
+font-family:Roboto,Arial,sans-serif;
 
-}
-
-#root{
-
-    min-height:100vh;
+overflow-x:hidden;
 
 }
 
-.app-layout{
+.app-shell{
 
-    display:flex;
+display:flex;
 
-    min-height:calc(100vh - 64px);
+min-height:calc(100vh - 64px);
 
 }
 
-.app-content{
+.content{
 
-    flex:1;
+flex:1;
 
-    padding:24px;
+padding:24px;
 
-    overflow-x:hidden;
+padding-bottom:90px;
 
-    background:#0f0f0f;
+background:#0f0f0f;
 
 }
 
 @media(max-width:768px){
 
-.app-layout{
-
-display:block;
-
-}
-
-.app-content{
+.content{
 
 padding:16px;
+
+padding-bottom:85px;
 
 }
 

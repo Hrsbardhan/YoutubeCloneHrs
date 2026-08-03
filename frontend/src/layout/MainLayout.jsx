@@ -1,30 +1,33 @@
-﻿import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import BottomNavigation from "../components/BottomNavigation";
 import "../styles/layout.css";
 
-function MainLayout({ children }) {
+function MainLayout({children}){
 
-    return (
+return(
 
-        <>
+<>
 
-            <Navbar />
+<Navbar/>
 
-            <div className="app-layout">
+<div className="app-shell">
 
-                <Sidebar />
+<Sidebar/>
 
-                <main className="app-content">
+<main className="content">
 
-                    {children}
+{children}
 
-                </main>
+</main>
 
-            </div>
+</div>
 
-        </>
+<BottomNavigation/>
 
-    );
+</>
+
+);
 
 }
 
