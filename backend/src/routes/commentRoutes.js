@@ -8,8 +8,14 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+    res.json([]);
+});
+
 router.get("/:videoId", getComments);
+
 router.post("/", protect, createComment);
+
 router.delete("/:id", protect, deleteComment);
 
 export default router;
