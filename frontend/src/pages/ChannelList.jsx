@@ -4,6 +4,7 @@ import ChannelCard from "../components/ChannelCard";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 
+
 function ChannelList() {
 
     const [channels, setChannels] = useState([]);
@@ -11,6 +12,7 @@ function ChannelList() {
     const [loading, setLoading] = useState(true);
 
     const [error, setError] = useState("");
+
 
     useEffect(() => {
 
@@ -35,25 +37,35 @@ function ChannelList() {
                 setLoading(false);
 
             }
+
         };
+
 
         loadChannels();
 
     }, []);
 
+
     if (loading) {
+
         return <Loading />;
+
     }
 
+
     if (error) {
+
         return (
             <ErrorMessage
                 message={error}
             />
         );
+
     }
 
+
     return (
+
         <div className="video-grid">
 
             {
@@ -68,7 +80,10 @@ function ChannelList() {
             }
 
         </div>
+
     );
+
 }
+
 
 export default ChannelList;

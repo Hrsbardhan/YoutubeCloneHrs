@@ -1,9 +1,10 @@
 ﻿import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
-import VideoCard from "../components/VideoCard";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
+
 
 function ChannelPage() {
 
@@ -11,36 +12,61 @@ function ChannelPage() {
         id
     } = useParams();
 
-    const [videos, setVideos] = useState([]);
+
+    const [channel, setChannel] = useState(null);
 
     const [loading, setLoading] = useState(true);
+
+    const [error, setError] = useState("");
 
 
     useEffect(() => {
 
-        const loadVideos = async () => {
+        const loadChannel = async () => {
 
-            const response = await api.get("/videos");
+            try {
 
-            const filtered =
-                response.data.filter(
-                    (video) =>
-                        video.channel?._id === id
+                const response = await api.get(
+                    `/channels/${id}`
                 );
 
-            setVideos(filtered);
+                setChannel(response.data);
 
-            setLoading(false);
+            } catch (error) {
+
+                setError(
+                    "Unable to load channel"
+                );
+
+            } finally {
+
+                setLoading(false);
+
+            }
 
         };
 
-        loadVideos();
+
+        loadChannel();
 
     }, [id]);
 
 
     if (loading) {
+
         return <Loading />;
+
+    }
+
+
+    if (error) {
+
+        return (
+            <ErrorMessage
+                message={error}
+            />
+        );
+
     }
 
 
@@ -49,26 +75,26 @@ function ChannelPage() {
         <Card>
 
             <h1>
-                Channel Videos
+                {channel.name}
             </h1>
 
 
-            {
-                videos.map(
-                    (video) => (
+            <p>
+                {channel.description}
+            </p>
 
-                        <VideoCard
-                            key={video._id}
-                            video={video}
-                        />
 
-                    )
-                )
-            }
+            <p>
+                Subscribers:
+                {" "}
+                {channel.subscribers}
+            </p>
 
         </Card>
 
     );
+
 }
+
 
 export default ChannelPage;
