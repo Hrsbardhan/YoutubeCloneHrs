@@ -6,6 +6,7 @@ function VideoCard({
 }) {
 
     return (
+
         <Card>
 
             <Link
@@ -18,23 +19,27 @@ function VideoCard({
 
             </Link>
 
+
             <p>
                 {video.description}
             </p>
 
-            <p>
-                Channel:
-                {" "}
-                {video.channel?.name || "Unknown"}
-            </p>
 
-            <span>
+            <p>
                 Views:
                 {" "}
                 {video.views}
-            </span>
+            </p>
+
+
+            <p>
+                Category:
+                {" "}
+                {video.category}
+            </p>
 
         </Card>
+
     );
 }
 

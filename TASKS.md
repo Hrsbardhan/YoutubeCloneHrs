@@ -1,18 +1,17 @@
 ﻿# TASKS
 
 Completed:
-[x] Video CRUD
-[x] Channel CRUD
-[x] Playlist CRUD
+[x] Backend APIs
+[x] Authentication UI
+[x] Login/Register Integration
 
 Current:
-[ ] Frontend Authentication Integration
+[ ] Video Frontend Integration
 
 Remaining:
-[ ] Home API integration improvements
-[ ] Watch page
-[ ] Channel UI
-[ ] Playlist UI
+[ ] Upload Video UI
+[ ] Channel Dashboard
+[ ] Playlist UI improvements
 [ ] Responsive Design
 [ ] Final Regression
 [ ] Capstone Cleanup

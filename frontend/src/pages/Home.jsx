@@ -12,13 +12,15 @@ function Home() {
 
     const [error, setError] = useState("");
 
+
     useEffect(() => {
 
         const loadVideos = async () => {
 
             try {
 
-                const response = await api.get("/videos");
+                const response =
+                    await api.get("/videos");
 
                 setVideos(response.data);
 
@@ -33,15 +35,19 @@ function Home() {
                 setLoading(false);
 
             }
+
         };
+
 
         loadVideos();
 
     }, []);
 
+
     if (loading) {
         return <Loading />;
     }
+
 
     if (error) {
         return (
@@ -51,22 +57,28 @@ function Home() {
         );
     }
 
+
     return (
+
         <div className="video-grid">
 
             {
-                videos.map((video) => (
+                videos.map(
+                    (video) => (
 
-                    <VideoCard
-                        key={video._id}
-                        video={video}
-                    />
+                        <VideoCard
+                            key={video._id}
+                            video={video}
+                        />
 
-                ))
+                    )
+                )
             }
 
         </div>
+
     );
+
 }
 
 export default Home;

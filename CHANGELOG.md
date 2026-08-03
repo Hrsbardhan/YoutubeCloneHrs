@@ -21,3 +21,9 @@
 - Added playlist delete API
 - Added playlist ownership validation
 - Added playlist video removal API
+
+## Frontend Authentication Integration
+- Connected login API
+- Connected register API
+- Added JWT storage flow
+- Added AuthContext integration
