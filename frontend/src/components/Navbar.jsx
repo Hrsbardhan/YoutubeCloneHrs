@@ -1,5 +1,4 @@
 ﻿import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 
@@ -15,51 +14,52 @@ function Navbar() {
 
         <nav>
 
-            <Link to="/">
+            <a href="/">
                 Home
-            </Link>
-
-
-            <Link to="/channels">
-                Channels
-            </Link>
-
-
-            <Link to="/playlists">
-                Playlists
-            </Link>
+            </a>
 
 
             {
                 user ? (
 
-                    <button
-                        onClick={logout}
-                    >
-                        Logout
-                    </button>
+                    <>
+
+                        <span>
+                            {user.username}
+                        </span>
+
+
+                        <button
+                            onClick={logout}
+                        >
+                            Logout
+                        </button>
+
+                    </>
 
                 ) : (
 
                     <>
-                        <Link to="/login">
-                            Login
-                        </Link>
 
-                        <Link to="/register">
+                        <a href="/login">
+                            Login
+                        </a>
+
+
+                        <a href="/register">
                             Register
-                        </Link>
+                        </a>
+
                     </>
 
                 )
-            }
 
+            }
 
         </nav>
 
     );
 
 }
-
 
 export default Navbar;
