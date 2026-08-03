@@ -1,27 +1,20 @@
 # TASKS
 
 Completed:
-[x] Authentication Backend
-[x] Authentication Frontend
-[x] Protected Routes
-[x] Logout Flow
-[x] Video CRUD Backend
-[x] Video CRUD Frontend
-[x] Channel CRUD Backend
-[x] Channel CRUD Frontend
-[x] Playlist CRUD Backend
-[x] Playlist CRUD Frontend
+[x] Authentication
+[x] Video CRUD
+[x] Channel CRUD
+[x] Playlist CRUD
+[x] Search
+[x] Watch Page
+[x] Responsive Layout
+[x] Global Loading
+[x] Error Handling
 
 Current:
-[ ] Watch Page Integration
+[ ] Final Regression
 
 Remaining:
-[ ] Related Videos
-[ ] Channel Details API
-[ ] Search UI Improvements
-[ ] Responsive Design
-[ ] Loading Improvements
-[ ] Error Handling
-[ ] Final Regression
 [ ] Documentation Cleanup
-[ ] Capstone Verification
+[ ] Production Verification
+[ ] Capstone Submission
